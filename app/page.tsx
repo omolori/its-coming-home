@@ -20,17 +20,17 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white">
       <div
-        className="fixed inset-0 bg-cover bg-center"
+        className="fixed left-0 right-0 bottom-0 top-[108px] bg-cover bg-center"
         style={{ backgroundImage: "url('/assets/hero.png')" }}
       />
-      <div className="fixed inset-0 bg-black/70" />
+      <div className="fixed left-0 right-0 bottom-0 top-[108px] bg-black/70" />
 
       <TopTicker />
       <TopBrand />
 
       <button
         onClick={() => setMenuOpen(!menuOpen)}
-        className="fixed left-4 top-[115px] z-[70] border border-[#ffde59] bg-[#721300] px-4 py-3 font-black text-[#ffde59]"
+        className="fixed left-4 top-[126px] z-[70] border border-[#ffde59] bg-[#721300] px-4 py-3 font-black text-[#ffde59]"
       >
         ☰
       </button>
@@ -56,7 +56,7 @@ export default function Home() {
         </nav>
       </aside>
 
-      <section className="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-36">
+      <section className="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-40">
         {page === "dashboard" && <Dashboard />}
         {page === "worldcup" && <WorldCupHub />}
         {page === "memes" && <MemeVault />}
@@ -67,12 +67,24 @@ export default function Home() {
 
 function TopTicker() {
   return (
-    <div className="fixed left-0 top-0 z-[60] w-full overflow-hidden border-b border-[#ffde59] bg-[#f7f0df] py-3 text-black">
-      <div className="ticker-track whitespace-nowrap text-xl italic">
-        It&apos;s coming home * Football is coming home * It&apos;s coming home
-        * Football is coming home * It&apos;s coming home * Football is coming
-        home * It&apos;s coming home * Football is coming home * It&apos;s
-        coming home * Football is coming home *
+    <div className="fixed left-0 top-0 z-[60] flex h-[48px] w-full items-center overflow-hidden border-b border-[#ffde59] bg-[#f7f0df] text-black">
+      <div className="ticker-track whitespace-nowrap text-lg italic leading-none">
+        <span>It&apos;s coming home</span>
+        <span className="ticker-dot">•</span>
+        <span>Football is coming home</span>
+        <span className="ticker-dot">•</span>
+        <span>It&apos;s coming home</span>
+        <span className="ticker-dot">•</span>
+        <span>Football is coming home</span>
+        <span className="ticker-dot">•</span>
+        <span>It&apos;s coming home</span>
+        <span className="ticker-dot">•</span>
+        <span>Football is coming home</span>
+        <span className="ticker-dot">•</span>
+        <span>It&apos;s coming home</span>
+        <span className="ticker-dot">•</span>
+        <span>Football is coming home</span>
+        <span className="ticker-dot">•</span>
       </div>
     </div>
   );
@@ -80,7 +92,7 @@ function TopTicker() {
 
 function TopBrand() {
   return (
-    <div className="fixed left-0 top-[52px] z-[55] flex w-full items-center justify-between border-b border-[#ffde59]/40 bg-black/85 px-8 py-5 text-xs tracking-[0.45em] text-white">
+    <div className="fixed left-0 top-[48px] z-[55] flex h-[60px] w-full items-center justify-between border-b border-[#ffde59]/40 bg-black/90 px-8 text-xs tracking-[0.45em] text-white">
       <div>$HOME</div>
       <div>EST. 1996</div>
     </div>
@@ -168,11 +180,6 @@ function Dashboard() {
           Play 1996 Three Lions Video
         </button>
 
-        <p className="mt-5">
-          &quot;Three Lions&quot; was released to coincide with the 1996 European
-          Football Championships which were being held in England at the time.
-        </p>
-
         <h3 className="mt-8 text-3xl font-black text-[#ffde59]">Spread</h3>
 
         <blockquote className="my-5 border-l-4 border-[#ffde59] bg-[#721300]/40 p-4 text-xl font-bold">
@@ -240,34 +247,14 @@ function WorldCupHub() {
       <h1 className="text-5xl font-black">World Cup Hub</h1>
 
       <h2 className="mt-10 text-3xl font-bold">Fixtures & Results</h2>
-      <Table
-        headers={["Date", "Group", "Match", "Result", "Status"]}
-        rows={fixtures}
-      />
+      <Table headers={["Date", "Group", "Match", "Result", "Status"]} rows={fixtures} />
 
       <h2 className="mt-10 text-3xl font-bold">Group Standings</h2>
-      <Table
-        headers={["Group", "Team", "Played", "Points", "GD"]}
-        rows={standings}
-      />
+      <Table headers={["Group", "Team", "Played", "Points", "GD"]} rows={standings} />
 
       <div className="mt-10 grid gap-5 md:grid-cols-2">
-        <Ranking
-          title="Top Scorers"
-          rows={[
-            ["Folarin Balogun", "USA", 2],
-            ["Reyna", "USA", 1],
-            ["Cyle Larin", "Canada", 1],
-          ]}
-        />
-        <Ranking
-          title="Top Assisters"
-          rows={[
-            ["Assist Leader", "USA", 2],
-            ["Player 2", "Canada", 1],
-            ["Player 3", "Mexico", 1],
-          ]}
-        />
+        <Ranking title="Top Scorers" rows={[["Folarin Balogun", "USA", 2], ["Reyna", "USA", 1], ["Cyle Larin", "Canada", 1]]} />
+        <Ranking title="Top Assisters" rows={[["Assist Leader", "USA", 2], ["Player 2", "Canada", 1], ["Player 3", "Mexico", 1]]} />
       </div>
     </section>
   );
@@ -291,10 +278,7 @@ function MemeVault() {
 
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {memes.map((meme) => (
-          <div
-            key={meme}
-            className="overflow-hidden border border-[#ffde59] bg-black"
-          >
+          <div key={meme} className="overflow-hidden border border-[#ffde59] bg-black">
             <img src={meme} alt="It's Coming Home meme" className="w-full" />
           </div>
         ))}

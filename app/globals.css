@@ -41,9 +41,16 @@ body {
 }
 
 .ticker-track {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 48px;
   min-width: 200%;
-  animation: ticker-scroll 24s linear infinite;
+  animation: ticker-scroll 28s linear infinite;
+}
+
+.ticker-dot {
+  font-size: 22px;
+  line-height: 1;
 }
 
 @keyframes ticker-scroll {
