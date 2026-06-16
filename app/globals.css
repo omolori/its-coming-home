@@ -39,3 +39,19 @@ body {
   background: #ffde59;
   color: #721300;
 }
+
+.ticker-track {
+  display: inline-block;
+  min-width: 200%;
+  animation: ticker-scroll 24s linear infinite;
+}
+
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}

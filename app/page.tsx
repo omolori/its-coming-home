@@ -25,19 +25,22 @@ export default function Home() {
       />
       <div className="fixed inset-0 bg-black/70" />
 
+      <TopTicker />
+      <TopBrand />
+
       <button
         onClick={() => setMenuOpen(!menuOpen)}
-        className="fixed left-4 top-4 z-50 border border-[#ffde59] bg-[#721300] px-4 py-3 font-black text-[#ffde59]"
+        className="fixed left-4 top-[115px] z-[70] border border-[#ffde59] bg-[#721300] px-4 py-3 font-black text-[#ffde59]"
       >
         ☰
       </button>
 
       <aside
-        className={`fixed left-0 top-0 z-40 h-full w-72 border-r border-[#ffde59] bg-black/95 p-6 transition-transform duration-300 ${
+        className={`fixed left-0 top-0 z-40 h-full w-72 border-r border-[#ffde59] bg-black/95 p-6 pt-32 transition-transform duration-300 ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <h2 className="mt-14 text-3xl font-black text-[#ffde59]">$HOME</h2>
+        <h2 className="text-3xl font-black text-[#ffde59]">$HOME</h2>
         <p className="mb-8 text-sm text-white/70">It&apos;s Coming Home</p>
 
         <nav className="space-y-3">
@@ -53,12 +56,34 @@ export default function Home() {
         </nav>
       </aside>
 
-      <section className="relative z-10 mx-auto max-w-7xl px-4 py-20">
+      <section className="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-36">
         {page === "dashboard" && <Dashboard />}
         {page === "worldcup" && <WorldCupHub />}
         {page === "memes" && <MemeVault />}
       </section>
     </main>
+  );
+}
+
+function TopTicker() {
+  return (
+    <div className="fixed left-0 top-0 z-[60] w-full overflow-hidden border-b border-[#ffde59] bg-[#f7f0df] py-3 text-black">
+      <div className="ticker-track whitespace-nowrap text-xl italic">
+        It&apos;s coming home * Football is coming home * It&apos;s coming home
+        * Football is coming home * It&apos;s coming home * Football is coming
+        home * It&apos;s coming home * Football is coming home * It&apos;s
+        coming home * Football is coming home *
+      </div>
+    </div>
+  );
+}
+
+function TopBrand() {
+  return (
+    <div className="fixed left-0 top-[52px] z-[55] flex w-full items-center justify-between border-b border-[#ffde59]/40 bg-black/85 px-8 py-5 text-xs tracking-[0.45em] text-white">
+      <div>$HOME</div>
+      <div>EST. 1996</div>
+    </div>
   );
 }
 
@@ -133,9 +158,7 @@ function Dashboard() {
         <p className="mt-4">
           The phrase &quot;It&apos;s coming home&quot; comes from the 1996 song
           &quot;Three Lions&quot; released by the band The Lightning Seeds with
-          the lyrics written by comedians David Baddiel and Frank Skinner, who
-          at the time presented a soccer themed comedy show &quot;Fantasy
-          Football League.&quot;
+          the lyrics written by comedians David Baddiel and Frank Skinner.
         </p>
 
         <button
@@ -148,17 +171,9 @@ function Dashboard() {
         <p className="mt-5">
           &quot;Three Lions&quot; was released to coincide with the 1996 European
           Football Championships which were being held in England at the time.
-          The lyrics of the song cover the glory of England winning the soccer
-          World Cup in 1966 and the pessimism caused by the subsequent failures
-          to equal that feat.
         </p>
 
         <h3 className="mt-8 text-3xl font-black text-[#ffde59]">Spread</h3>
-
-        <p className="mt-4">
-          The song was an instant hit in England and the chorus soon became a
-          popular chant at football stadiums across the UK:
-        </p>
 
         <blockquote className="my-5 border-l-4 border-[#ffde59] bg-[#721300]/40 p-4 text-xl font-bold">
           It&apos;s coming home, it&apos;s coming home, it&apos;s coming,
@@ -166,10 +181,8 @@ function Dashboard() {
         </blockquote>
 
         <p>
-          In 1998, the Lightning Seeds released an updated version to coincide
-          with the FIFA World Cup being held in France that year. The song again
-          was a hit and actually outsold the official England football team
-          song.
+          In 1998, The Lightning Seeds released an updated version to coincide
+          with the FIFA World Cup being held in France that year.
         </p>
 
         <button
@@ -178,13 +191,6 @@ function Dashboard() {
         >
           Play 1998 Three Lions Video
         </button>
-
-        <p className="mt-5">
-          Between 2002 and 2018, the song and its chorus received regular plays
-          on radio and, with the proliferation of online streaming services such
-          as Spotify, online as well. The chorus chant continued to flourish
-          especially if England did well in a particular tournament.
-        </p>
       </section>
 
       {video && (
