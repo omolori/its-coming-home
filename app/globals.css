@@ -8,39 +8,34 @@ body {
   background: black;
 }
 
-.nav-btn {
-  width: 100%;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 215, 0, 0.22);
-  background: rgba(255, 255, 255, 0.08);
-  padding: 14px;
-  text-align: left;
-  font-weight: 800;
-  color: white;
+.nav-btn,
+.action-btn,
+.link-card {
+  border: 1px solid #ffde59;
+  background: #721300;
+  color: #ffde59;
+  font-weight: 900;
   transition: all 0.2s ease;
 }
 
-.nav-btn:hover {
-  background: rgba(255, 215, 0, 0.2);
-  border-color: rgba(255, 215, 0, 0.55);
+.nav-btn {
+  width: 100%;
+  padding: 14px;
+  text-align: left;
 }
 
-.buy-btn {
-  margin-top: 22px;
-  display: inline-block;
-  border-radius: 18px;
-  background: #ffd700;
-  padding: 16px 48px;
-  font-size: 28px;
-  font-weight: 900;
-  color: black;
-  box-shadow: 0 0 28px rgba(255, 215, 0, 0.55);
+.action-btn {
+  padding: 14px 22px;
 }
 
-@media (max-width: 640px) {
-  .buy-btn {
-    width: 100%;
-    padding: 14px 24px;
-    font-size: 20px;
-  }
+.link-card {
+  padding: 18px;
+  text-align: center;
+}
+
+.nav-btn:hover,
+.action-btn:hover,
+.link-card:hover {
+  background: #ffde59;
+  color: #721300;
 }

@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 
-const PUMPFUN_URL =
-  "https://pump.fun/coin/3SMtZcc2iWRGvVGtVoL61MfD8zv27NUY4SyWasVXpump";
+const CA = "3SMtZcc2iWRGvVGtVoL61MfD8zv27NUY4SyWasVXpump";
+
+const PUMPFUN_URL = `https://pump.fun/coin/${CA}`;
 const X_URL = "https://x.com/itscominghomeme";
 const TG_URL = "https://t.me/+WXdUZvU9DOUwNTdk";
 const X_GROUP_URL =
@@ -26,17 +27,17 @@ export default function Home() {
 
       <button
         onClick={() => setMenuOpen(!menuOpen)}
-        className="fixed left-4 top-4 z-50 rounded-xl bg-yellow-400 px-4 py-2 font-black text-black shadow-lg"
+        className="fixed left-4 top-4 z-50 border border-[#ffde59] bg-[#721300] px-4 py-3 font-black text-[#ffde59]"
       >
         ☰
       </button>
 
       <aside
-        className={`fixed left-0 top-0 z-40 h-full w-72 border-r border-yellow-400/30 bg-black/90 p-6 backdrop-blur-xl transition-transform duration-300 ${
+        className={`fixed left-0 top-0 z-40 h-full w-72 border-r border-[#ffde59] bg-black/95 p-6 transition-transform duration-300 ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <h2 className="mt-12 text-3xl font-black text-yellow-400">$HOME</h2>
+        <h2 className="mt-14 text-3xl font-black text-[#ffde59]">$HOME</h2>
         <p className="mb-8 text-sm text-white/70">It&apos;s Coming Home</p>
 
         <nav className="space-y-3">
@@ -62,17 +63,25 @@ export default function Home() {
 }
 
 function Dashboard() {
+  const [copied, setCopied] = useState(false);
+  const [video, setVideo] = useState<string | null>(null);
+
+  const copyCA = async () => {
+    await navigator.clipboard.writeText(CA);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
   return (
     <>
-      <section className="flex min-h-[80vh] items-end justify-center rounded-3xl border border-yellow-400/20 bg-black/35 p-6 text-center shadow-2xl backdrop-blur-sm">
-        <div className="max-w-4xl rounded-3xl border border-yellow-400/30 bg-black/75 p-8 backdrop-blur-md">
-          <h1 className="text-5xl font-black md:text-8xl">IT&apos;S COMING HOME</h1>
+      <section className="flex min-h-[80vh] items-end justify-center p-6 text-center">
+        <div className="max-w-4xl border border-[#ffde59] bg-black/85 p-8">
+          <h1 className="text-5xl font-black md:text-8xl">
+            IT&apos;S COMING HOME
+          </h1>
           <p className="mt-4 text-lg text-white/85 md:text-2xl">
             $HOME — the global football meme coin built for World Cup chaos.
           </p>
-          <a href={DEX_URL} target="_blank" className="buy-btn">
-            BUY $HOME
-          </a>
         </div>
       </section>
 
@@ -86,14 +95,116 @@ function Dashboard() {
         <LinkCard label="Know Your Meme" href={KYM_URL} />
       </div>
 
-      <h2 className="mt-12 text-3xl font-black">Live Dexscreener Chart</h2>
+      <section className="mt-10 border border-[#ffde59] bg-black/80 p-6">
+        <h2 className="text-3xl font-black">Coin Address</h2>
 
-      <div className="mt-5 overflow-hidden rounded-3xl border border-yellow-400/20 bg-black/70">
-        <iframe
-          src={`${DEX_URL}?embed=1&theme=dark&info=0`}
-          className="h-[760px] w-full border-0"
-        />
-      </div>
+        <div className="mt-4 flex flex-col gap-3 lg:flex-row">
+          <div className="break-all border border-[#ffde59] bg-black p-4 font-mono text-sm text-[#ffde59] lg:flex-1">
+            CA: {CA}
+          </div>
+
+          <button onClick={copyCA} className="action-btn">
+            {copied ? "Copied" : "Copy CA"}
+          </button>
+
+          <a href={DEX_URL} target="_blank" className="action-btn text-center">
+            Live Dex Chart
+          </a>
+        </div>
+      </section>
+
+      <section className="mt-10 border border-[#ffde59] bg-black/80 p-6 leading-8">
+        <h2 className="text-4xl font-black text-[#ffde59]">About</h2>
+
+        <p className="mt-5">
+          &quot;It&apos;s Coming Home&quot; is a slogan amongst fans of the
+          England national football team to express their optimism that their
+          team will win at the FIFA World Cup. By saying &quot;It&apos;s coming
+          home&quot; they literally mean that England will bring the World Cup
+          home to England. Due to the overly optimistic nature of the slogan it
+          has been used in memes designed to jokingly mock those who get
+          overexcited at positive progress for England in international
+          football. The term significantly rose in use during the 2018 World Cup
+          as England progressed through the tournament.
+        </p>
+
+        <h3 className="mt-8 text-3xl font-black text-[#ffde59]">Origin</h3>
+
+        <p className="mt-4">
+          The phrase &quot;It&apos;s coming home&quot; comes from the 1996 song
+          &quot;Three Lions&quot; released by the band The Lightning Seeds with
+          the lyrics written by comedians David Baddiel and Frank Skinner, who
+          at the time presented a soccer themed comedy show &quot;Fantasy
+          Football League.&quot;
+        </p>
+
+        <button
+          onClick={() => setVideo("https://www.youtube.com/embed/RJqimlFcJsM")}
+          className="action-btn mt-5"
+        >
+          Play 1996 Three Lions Video
+        </button>
+
+        <p className="mt-5">
+          &quot;Three Lions&quot; was released to coincide with the 1996 European
+          Football Championships which were being held in England at the time.
+          The lyrics of the song cover the glory of England winning the soccer
+          World Cup in 1966 and the pessimism caused by the subsequent failures
+          to equal that feat.
+        </p>
+
+        <h3 className="mt-8 text-3xl font-black text-[#ffde59]">Spread</h3>
+
+        <p className="mt-4">
+          The song was an instant hit in England and the chorus soon became a
+          popular chant at football stadiums across the UK:
+        </p>
+
+        <blockquote className="my-5 border-l-4 border-[#ffde59] bg-[#721300]/40 p-4 text-xl font-bold">
+          It&apos;s coming home, it&apos;s coming home, it&apos;s coming,
+          football&apos;s coming home!
+        </blockquote>
+
+        <p>
+          In 1998, the Lightning Seeds released an updated version to coincide
+          with the FIFA World Cup being held in France that year. The song again
+          was a hit and actually outsold the official England football team
+          song.
+        </p>
+
+        <button
+          onClick={() => setVideo("https://www.youtube.com/embed/KsrGajtU8tw")}
+          className="action-btn mt-5"
+        >
+          Play 1998 Three Lions Video
+        </button>
+
+        <p className="mt-5">
+          Between 2002 and 2018, the song and its chorus received regular plays
+          on radio and, with the proliferation of online streaming services such
+          as Spotify, online as well. The chorus chant continued to flourish
+          especially if England did well in a particular tournament.
+        </p>
+      </section>
+
+      {video && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4">
+          <div className="w-full max-w-4xl border border-[#ffde59] bg-black p-4">
+            <button
+              onClick={() => setVideo(null)}
+              className="mb-4 border border-[#ffde59] bg-[#721300] px-4 py-2 font-bold text-[#ffde59]"
+            >
+              Close
+            </button>
+            <iframe
+              src={video}
+              className="aspect-video w-full"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }
@@ -119,11 +230,8 @@ function WorldCupHub() {
   ];
 
   return (
-    <section className="rounded-3xl border border-yellow-400/20 bg-black/75 p-6 backdrop-blur-md">
+    <section className="border border-[#ffde59] bg-black/80 p-6">
       <h1 className="text-5xl font-black">World Cup Hub</h1>
-      <p className="mt-2 text-white/70">
-        Live API can be added here. For now this uses starter data.
-      </p>
 
       <h2 className="mt-10 text-3xl font-bold">Fixtures & Results</h2>
       <Table
@@ -138,8 +246,22 @@ function WorldCupHub() {
       />
 
       <div className="mt-10 grid gap-5 md:grid-cols-2">
-        <Ranking title="Top Scorers" rows={[["Folarin Balogun", "USA", 2], ["Reyna", "USA", 1], ["Cyle Larin", "Canada", 1]]} />
-        <Ranking title="Top Assisters" rows={[["Assist Leader", "USA", 2], ["Player 2", "Canada", 1], ["Player 3", "Mexico", 1]]} />
+        <Ranking
+          title="Top Scorers"
+          rows={[
+            ["Folarin Balogun", "USA", 2],
+            ["Reyna", "USA", 1],
+            ["Cyle Larin", "Canada", 1],
+          ]}
+        />
+        <Ranking
+          title="Top Assisters"
+          rows={[
+            ["Assist Leader", "USA", 2],
+            ["Player 2", "Canada", 1],
+            ["Player 3", "Mexico", 1],
+          ]}
+        />
       </div>
     </section>
   );
@@ -157,13 +279,16 @@ function MemeVault() {
   ];
 
   return (
-    <section className="rounded-3xl border border-yellow-400/20 bg-black/75 p-6 backdrop-blur-md">
+    <section className="border border-[#ffde59] bg-black/80 p-6">
       <h1 className="text-5xl font-black">Meme Vault</h1>
       <p className="mt-2 text-white/70">All the $HOME memes in one place.</p>
 
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {memes.map((meme) => (
-          <div key={meme} className="overflow-hidden rounded-2xl border border-white/10 bg-black/60">
+          <div
+            key={meme}
+            className="overflow-hidden border border-[#ffde59] bg-black"
+          >
             <img src={meme} alt="It's Coming Home meme" className="w-full" />
           </div>
         ))}
@@ -174,32 +299,38 @@ function MemeVault() {
 
 function LinkCard({ label, href }: { label: string; href: string }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      className="rounded-2xl border border-yellow-400/20 bg-black/70 p-5 text-center font-bold transition hover:bg-yellow-400 hover:text-black"
-    >
+    <a href={href} target="_blank" className="link-card">
       {label}
     </a>
   );
 }
 
-function Table({ headers, rows }: { headers: string[]; rows: (string | number)[][] }) {
+function Table({
+  headers,
+  rows,
+}: {
+  headers: string[];
+  rows: (string | number)[][];
+}) {
   return (
-    <div className="mt-4 overflow-x-auto rounded-2xl border border-white/10">
+    <div className="mt-4 overflow-x-auto border border-[#ffde59]">
       <table className="w-full min-w-[650px] text-left">
-        <thead className="bg-yellow-400 text-black">
+        <thead className="bg-[#721300] text-[#ffde59]">
           <tr>
             {headers.map((h) => (
-              <th key={h} className="p-3">{h}</th>
+              <th key={h} className="border-b border-[#ffde59] p-3">
+                {h}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
           {rows.map((row, i) => (
-            <tr key={i} className="border-t border-white/10 bg-black/60">
+            <tr key={i} className="border-t border-[#ffde59]/40 bg-black/80">
               {row.map((cell, j) => (
-                <td key={j} className="p-3">{cell}</td>
+                <td key={j} className="p-3">
+                  {cell}
+                </td>
               ))}
             </tr>
           ))}
@@ -209,9 +340,15 @@ function Table({ headers, rows }: { headers: string[]; rows: (string | number)[]
   );
 }
 
-function Ranking({ title, rows }: { title: string; rows: (string | number)[][] }) {
+function Ranking({
+  title,
+  rows,
+}: {
+  title: string;
+  rows: (string | number)[][];
+}) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/60 p-5">
+    <div className="border border-[#ffde59] bg-black/70 p-5">
       <h3 className="text-2xl font-bold">{title}</h3>
       <Table headers={["Player", "Country", "Total"]} rows={rows} />
     </div>
