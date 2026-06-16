@@ -20,10 +20,10 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white">
       <div
-        className="fixed left-0 right-0 bottom-0 top-[108px] bg-cover bg-center"
+        className="fixed left-0 right-0 bottom-0 top-[120px] bg-cover bg-center"
         style={{ backgroundImage: "url('/assets/hero.png')" }}
       />
-      <div className="fixed left-0 right-0 bottom-0 top-[108px] bg-black/70" />
+      <div className="fixed left-0 right-0 bottom-0 top-[120px] bg-black/70" />
 
       <TopTicker />
       <TopBrand />
@@ -56,7 +56,7 @@ export default function Home() {
         </nav>
       </aside>
 
-      <section className="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-40">
+      <section className="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-56">
         {page === "dashboard" && <Dashboard />}
         {page === "worldcup" && <WorldCupHub />}
         {page === "memes" && <MemeVault />}

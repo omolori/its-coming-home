@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "$HOME - It's Coming Home",
-  description: "$HOME - The global football meme coin built for World Cup chaos.",
+  description: "$HOME - The global football meme coin.",
   icons: {
     icon: "/favicon.png",
   },
