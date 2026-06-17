@@ -12,6 +12,35 @@ const X_GROUP_URL =
 const DEX_URL =
   "https://dexscreener.com/solana/d1au7pj6me5ljzfnrcvlwtakj2o5pddqdf8hvyxg477n";
 const KYM_URL = "https://knowyourmeme.com/memes/its-coming-home-three-lions";
+const TIKTOK_TAG_URL = "https://www.tiktok.com/tag/itscominghome";
+
+const tiktokVideos = [
+  {
+    title: "Trending #ItsComingHome TikTok 1",
+    embedUrl: "https://www.tiktok.com/embed/v2/7650151271432834326?is_from_webapp=1&sender_device=pc&web_id=7652130958993081878",
+    views: "10K+",
+  },
+  {
+    title: "Trending #ItsComingHome TikTok 2",
+    embedUrl: "https://www.tiktok.com/embed/v2/7649810792694533398?is_from_webapp=1&sender_device=pc&web_id=7652130958993081878",
+    views: "10K+",
+  },
+  {
+    title: "Trending #ItsComingHome TikTok 3",
+    embedUrl: "https://www.tiktok.com/embed/v2/7652136597290306838?is_from_webapp=1&sender_device=pc&web_id=7652130958993081878",
+    views: "10K+",
+  },
+  {
+    title: "Trending #ItsComingHome TikTok 4",
+    embedUrl: "https://www.tiktok.com/embed/v2/7621999890972871959?is_from_webapp=1&sender_device=pc&web_id=7652130958993081878",
+    views: "10K+",
+  },
+  {
+    title: "Trending #ItsComingHome TikTok 5",
+    embedUrl: "https://www.tiktok.com/embed/v2/7647234139904855299?is_from_webapp=1&sender_device=pc&web_id=7652130958993081878",
+    views: "10K+",
+  },
+];
 
 export default function Home() {
   const [page, setPage] = useState("dashboard");
@@ -101,7 +130,6 @@ function TopBrand() {
 
 function Dashboard() {
   const [copied, setCopied] = useState(false);
-  const [video, setVideo] = useState<string | null>(null);
 
   const copyCA = async () => {
     await navigator.clipboard.writeText(CA);
@@ -173,12 +201,14 @@ function Dashboard() {
           the lyrics written by comedians David Baddiel and Frank Skinner.
         </p>
 
-        <button
-          onClick={() => setVideo("https://www.youtube.com/embed/RJqimlFcJsM")}
-          className="action-btn mt-5"
-        >
-          Play 1996 Three Lions Video
-        </button>
+        <div className="mt-6 border border-[#ffde59]">
+          <iframe
+            src="https://www.youtube.com/embed/RJqimlFcJsM"
+            className="aspect-video w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
 
         <h3 className="mt-8 text-3xl font-black text-[#ffde59]">Spread</h3>
 
@@ -192,32 +222,17 @@ function Dashboard() {
           with the FIFA World Cup being held in France that year.
         </p>
 
-        <button
-          onClick={() => setVideo("https://www.youtube.com/embed/KsrGajtU8tw")}
-          className="action-btn mt-5"
-        >
-          Play 1998 Three Lions Video
-        </button>
+        <div className="mt-6 border border-[#ffde59]">
+          <iframe
+            src="https://www.youtube.com/embed/KsrGajtU8tw"
+            className="aspect-video w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
       </section>
 
-      {video && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4">
-          <div className="w-full max-w-4xl border border-[#ffde59] bg-black p-4">
-            <button
-              onClick={() => setVideo(null)}
-              className="mb-4 border border-[#ffde59] bg-[#721300] px-4 py-2 font-bold text-[#ffde59]"
-            >
-              Close
-            </button>
-            <iframe
-              src={video}
-              className="aspect-video w-full"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-            />
-          </div>
-        </div>
-      )}
+      <TikTokTrending />
     </>
   );
 }
@@ -342,5 +357,58 @@ function Ranking({
       <h3 className="text-2xl font-bold">{title}</h3>
       <Table headers={["Player", "Country", "Total"]} rows={rows} />
     </div>
+  );
+}
+
+function TikTokTrending() {
+  return (
+    <section className="mt-10 border border-[#ffde59] bg-black/80 p-6">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h2 className="text-4xl font-black text-[#ffde59]">
+            Trending TikToks
+          </h2>
+          <p className="mt-2 text-white/70">
+            Latest manually selected #ItsComingHome TikToks with 10K+ plays.
+          </p>
+        </div>
+
+        <a href={TIKTOK_TAG_URL} target="_blank" className="action-btn text-center">
+          View TikTok Search
+        </a>
+      </div>
+
+      <div className="mt-8 grid gap-5 lg:grid-cols-2">
+        {tiktokVideos.map((video, index) => (
+          <div
+            key={index}
+            className="border border-[#ffde59] bg-black p-4"
+          >
+            <div className="mb-3 flex items-center justify-between">
+              <h3 className="font-black text-[#ffde59]">
+                {video.title}
+              </h3>
+
+              <span className="text-sm text-white/70">
+                {video.views}
+              </span>
+            </div>
+
+            {video.embedUrl ? (
+              <iframe
+                src={video.embedUrl}
+                className="h-[750px] w-full border-0"
+                allow="encrypted-media"
+                allowFullScreen
+              />
+            ) : (
+              <div className="flex h-[750px] items-center justify-center border border-[#ffde59]/40 text-center text-white/60">
+                Paste TikTok Embed URL Here
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
