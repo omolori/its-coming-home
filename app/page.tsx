@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CA = "3SMtZcc2iWRGvVGtVoL61MfD8zv27NUY4SyWasVXpump";
 
@@ -243,38 +243,89 @@ function Dashboard() {
 }
 
 function WorldCupHub() {
-  const fixtures = [
-    ["2026-06-11", "A", "Mexico vs South Africa", "2-0", "FT"],
-    ["2026-06-11", "A", "South Korea vs Czechia", "2-1", "FT"],
-    ["2026-06-12", "B", "Canada vs Bosnia", "1-1", "FT"],
-    ["2026-06-12", "D", "USA vs Paraguay", "4-1", "FT"],
-    ["2026-06-13", "C", "Brazil vs Morocco", "1-1", "FT"],
-    ["2026-06-14", "D", "Australia vs Turkey", "2-0", "FT"],
-  ];
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  const standings = [
-    ["A", "Mexico", 1, 3, 2],
-    ["A", "South Korea", 1, 3, 1],
-    ["B", "Canada", 1, 1, 0],
-    ["B", "Bosnia", 1, 1, 0],
-    ["C", "Scotland", 1, 3, 1],
-    ["D", "USA", 1, 3, 3],
-    ["D", "Australia", 1, 3, 2],
-  ];
+  useEffect(() => {
+    async function loadWorldCup() {
+      const res = await fetch("/api/worldcup");
+      const json = await res.json();
+      setData(json);
+      setLoading(false);
+    }
+
+    loadWorldCup();
+
+    const interval = setInterval(loadWorldCup, 300000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="border border-[#ffde59] bg-black/80 p-6">
+        <h1 className="text-5xl font-black">World Cup Hub</h1>
+        <p className="mt-4 text-[#ffde59]">Loading live World Cup data...</p>
+      </section>
+    );
+  }
+
+  const fixtures =
+    data?.fixtures?.map((item: any) => [
+      item.fixture?.date?.slice(0, 10) || "-",
+      item.league?.round || "-",
+      `${item.teams?.home?.name || "-"} vs ${item.teams?.away?.name || "-"}`,
+      item.fixture?.status?.short === "NS"
+        ? "-"
+        : `${item.goals?.home ?? 0}-${item.goals?.away ?? 0}`,
+      item.fixture?.status?.short || "-",
+    ]) || [];
+
+  const standings =
+    data?.standings?.[0]?.league?.standings?.flat()?.map((team: any) => [
+      team.group || "-",
+      team.team?.name || "-",
+      team.all?.played ?? 0,
+      team.points ?? 0,
+      team.goalsDiff ?? 0,
+    ]) || [];
+
+  const scorers =
+    data?.scorers?.slice(0, 10).map((item: any) => [
+      item.player?.name || "-",
+      item.statistics?.[0]?.team?.name || "-",
+      item.statistics?.[0]?.goals?.total ?? 0,
+    ]) || [];
+
+  const assisters =
+    data?.assisters?.slice(0, 10).map((item: any) => [
+      item.player?.name || "-",
+      item.statistics?.[0]?.team?.name || "-",
+      item.statistics?.[0]?.goals?.assists ?? 0,
+    ]) || [];
 
   return (
     <section className="border border-[#ffde59] bg-black/80 p-6">
       <h1 className="text-5xl font-black">World Cup Hub</h1>
 
+      <p className="mt-3 text-sm text-white/70">
+        Source: {data?.source === "live" ? "Live API-Football data" : "Fallback data"}
+      </p>
+
       <h2 className="mt-10 text-3xl font-bold">Fixtures & Results</h2>
-      <Table headers={["Date", "Group", "Match", "Result", "Status"]} rows={fixtures} />
+      <Table
+        headers={["Date", "Round", "Match", "Result", "Status"]}
+        rows={fixtures}
+      />
 
       <h2 className="mt-10 text-3xl font-bold">Group Standings</h2>
-      <Table headers={["Group", "Team", "Played", "Points", "GD"]} rows={standings} />
+      <Table
+        headers={["Group", "Team", "Played", "Points", "GD"]}
+        rows={standings}
+      />
 
       <div className="mt-10 grid gap-5 md:grid-cols-2">
-        <Ranking title="Top Scorers" rows={[["Folarin Balogun", "USA", 2], ["Reyna", "USA", 1], ["Cyle Larin", "Canada", 1]]} />
-        <Ranking title="Top Assisters" rows={[["Assist Leader", "USA", 2], ["Player 2", "Canada", 1], ["Player 3", "Mexico", 1]]} />
+        <Ranking title="Top Scorers" rows={scorers} />
+        <Ranking title="Top Assisters" rows={assisters} />
       </div>
     </section>
   );
