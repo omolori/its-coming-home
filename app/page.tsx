@@ -18,27 +18,32 @@ const tiktokVideos = [
   {
     title: "Trending #ItsComingHome TikTok 1",
     embedUrl: "https://www.tiktok.com/embed/v2/7650151271432834326?is_from_webapp=1&sender_device=pc&web_id=7652130958993081878",
-    views: "10K+",
+    views: "",
   },
   {
     title: "Trending #ItsComingHome TikTok 2",
     embedUrl: "https://www.tiktok.com/embed/v2/7649810792694533398?is_from_webapp=1&sender_device=pc&web_id=7652130958993081878",
-    views: "10K+",
+    views: "",
   },
   {
     title: "Trending #ItsComingHome TikTok 3",
     embedUrl: "https://www.tiktok.com/embed/v2/7652136597290306838?is_from_webapp=1&sender_device=pc&web_id=7652130958993081878",
-    views: "10K+",
+    views: "",
   },
   {
     title: "Trending #ItsComingHome TikTok 4",
     embedUrl: "https://www.tiktok.com/embed/v2/7621999890972871959?is_from_webapp=1&sender_device=pc&web_id=7652130958993081878",
-    views: "10K+",
+    views: "",
   },
   {
     title: "Trending #ItsComingHome TikTok 5",
     embedUrl: "https://www.tiktok.com/embed/v2/7647234139904855299?is_from_webapp=1&sender_device=pc&web_id=7652130958993081878",
-    views: "10K+",
+    views: "",
+  },
+  {
+    title: "Trending #ItsComingHome TikTok 6",
+    embedUrl: "https://www.tiktok.com/embed/v2/7650224378306661654?is_from_webapp=1&sender_device=pc&web_id=7652130958993081878",
+    views: "",
   },
 ];
 
